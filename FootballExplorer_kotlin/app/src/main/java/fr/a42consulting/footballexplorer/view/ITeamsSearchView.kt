@@ -8,4 +8,5 @@ interface ITeamsSearchView {
     fun onSearchResult(teams: ArrayList<TeamsSearchTeam>, isNewSearch: Boolean)
     fun onShowTeam(team: String)
     fun onMessage(message: String)
+    fun onSearchFailed()
 }

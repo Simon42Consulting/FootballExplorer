@@ -7,10 +7,12 @@
     tools:context=".view.TeamsSearchActivity">
 
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/playersList"
         android:dividerHeight="5.0sp"/>
+
+
 </RelativeLayout>

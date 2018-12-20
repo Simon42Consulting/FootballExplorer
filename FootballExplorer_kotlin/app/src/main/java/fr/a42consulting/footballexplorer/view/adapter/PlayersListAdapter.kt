@@ -1,36 +1,40 @@
 package fr.a42consulting.footballexplorer.view.adapter
 
 import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
 
 import com.bumptech.glide.Glide
 
 import fr.a42consulting.footballexplorer.model.PlayersListPlayer
 import fr.a42consulting.footballexplorer.R
+import kotlinx.android.synthetic.main.list_player_element.view.*
 
-class PlayersListAdapter(private val mContext: Context, private val resource: Int) : ArrayAdapter<PlayersListPlayer>(mContext, resource) {
+class PlayersListAdapter(private val mContext: Context, val items: ArrayList<PlayersListPlayer>) : RecyclerView.Adapter<PlayersListAdapter.ViewHolder>() {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val player = items[position]
+        Glide.with(mContext).load(player.imageUrl).into(holder.playerImage)
+        holder.playerName.text = player.name
+        holder.playerRole.text = player.role
+        holder.playerBirth.text = player.birth
+        holder.playerPrice.text = player.price
+    }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val v: View = convertView ?: LayoutInflater.from(mContext).inflate(resource, parent, false)
+    override fun getItemCount(): Int {
+        return items.size
+    }
 
-        val player = getItem(position)
-        val playerImage = v.findViewById<ImageView>(R.id.playerImage)
-        val playerName = v.findViewById<TextView>(R.id.playerName)
-        val playerRole = v.findViewById<TextView>(R.id.playerRole)
-        val playerBirth = v.findViewById<TextView>(R.id.playerBirth)
-        val playerPrice = v.findViewById<TextView>(R.id.playerPrice)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return PlayersListAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_player_element, parent, false))
+    }
 
-        Glide.with(mContext).load(player!!.imageUrl).into(playerImage)
-        playerName.text = player.name
-        playerBirth.text = player.birth
-        playerRole.text = player.role
-        playerPrice.text = player.price
-
-        return v
+    class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
+        val playerImage = itemView.playerImage!!
+        val playerName = itemView.playerName!!
+        val playerRole = itemView.playerRole!!
+        val playerBirth = itemView.playerBirth!!
+        val playerPrice = itemView.playerPrice!!
     }
 }

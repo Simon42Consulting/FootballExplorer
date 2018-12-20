@@ -22,7 +22,7 @@ class PlayersListPresenter(private var playersListView: IPlayersListView?) : IPl
                     team = PlayersListModel.fromJson(jsonResult)
                     playersListView!!.onRequestResult(team!!.players)
                 } catch (e: JSONException) {
-                    playersListView!!.onMessage("La récupération des données a échoué.")
+                    playersListView!!.onRequestFailed()
                     e.printStackTrace()
                 }
             }

@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FootballExplorer</string>
+    <string name="team">Équipe</string>
+    <string name="player_image">Photo du joueur</string>
+    <string name="players_found">joueurs(s) trouvé(s)</string>
+    <string name="players_found_no">Aucun joueur trouvé.</string>
+    <string name="players_found_failed">La récupération des données a échoué.</string>
+    <string name="teams_found_no">La recherche n’a donné aucun résultat.</string>
+    <string name="teams_found">résultat(s) trouvé(s)</string>
+    <string name="query_hint">Exemple : French Ligue 1</string>
+    <string name="teams_found_failed">La récupération des données a échoué.</string>
 </resources>

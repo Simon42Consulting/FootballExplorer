@@ -22,7 +22,7 @@ class TeamsSearchPresenter(private var searchView: ITeamsSearchView?) : ITeamsSe
                     league = TeamsSearchModel.fromJson(jsonResult)
                     searchView!!.onSearchResult(league!!.teams, true)
                 } catch (e: JSONException) {
-                    searchView!!.onMessage("La récupération des données a échoué.")
+                    searchView!!.onSearchFailed()
                     e.printStackTrace()
                 }
             }

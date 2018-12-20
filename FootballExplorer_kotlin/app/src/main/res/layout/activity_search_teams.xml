@@ -11,18 +11,14 @@
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:queryHint="@string/query_hint"
         android:id="@+id/searchField"
         android:iconifiedByDefault="false"/>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/searchField"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:columnWidth="150dp"
-        android:numColumns="auto_fit"
-        android:horizontalSpacing="8dp"
-        android:verticalSpacing="8dp"
-        android:stretchMode="spacingWidthUniform"
         android:id="@+id/resultsGrid"/>
 </RelativeLayout>

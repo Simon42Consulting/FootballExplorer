@@ -2,7 +2,7 @@ package fr.a42consulting.footballexplorer.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ListView
+import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 
 import java.util.ArrayList
@@ -12,11 +12,9 @@ import fr.a42consulting.footballexplorer.presenter.IPlayersListPresenter
 import fr.a42consulting.footballexplorer.presenter.PlayersListPresenter
 import fr.a42consulting.footballexplorer.R
 import fr.a42consulting.footballexplorer.view.adapter.PlayersListAdapter
+import kotlinx.android.synthetic.main.activity_players_list.*
 
 class PlayersListActivity : AppCompatActivity(), IPlayersListView {
-
-    private lateinit var playersList: ListView
-
     private lateinit var playersListPresenter: IPlayersListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,22 +23,25 @@ class PlayersListActivity : AppCompatActivity(), IPlayersListView {
 
         val team = intent.getStringExtra(TEAM_NAME)
 
-        playersList = findViewById(R.id.playersList)
+        playersList.layoutManager = LinearLayoutManager(this)
 
         playersListPresenter = PlayersListPresenter(this)
         playersListPresenter.onLoadPlayers(team)
     }
 
     override fun onRequestResult(players: ArrayList<PlayersListPlayer>) {
-        val listAdapter = PlayersListAdapter(this, R.layout.list_player_element)
+        val listAdapter = PlayersListAdapter(this, players)
         playersList.adapter = listAdapter
-        listAdapter.addAll(players)
         listAdapter.notifyDataSetChanged()
         if (players.size == 0) {
-            onMessage("Aucun joueur trouvé.")
+            onMessage(getString(R.string.players_found_no))
         } else {
-            onMessage(players.size.toString() + " joueurs(s) trouvé(s)")
+            onMessage(players.size.toString() + getString(R.string.players_found))
         }
+    }
+
+    override fun onRequestFailed() {
+        onMessage(getString(R.string.players_found_failed))
     }
 
     override fun onMessage(message: String) {
